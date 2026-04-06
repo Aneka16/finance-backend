@@ -1,93 +1,115 @@
-Finance Data Processing & Access Control Backend
- Overview
+# 💰 Finance Data Processing & Access Control Backend
 
-This project is a backend system designed for a finance dashboard, where users can manage financial records and access data based on their roles.
+## 📌 Overview
 
-The focus of this project is not just CRUD operations, but also:
+This project is a backend system designed for a **finance dashboard**, where users can manage financial records and access data based on their roles.
 
-implementing role-based access
-applying business rules
-structuring a clean backend architecture
-and working with a real database
+The focus of this project goes beyond basic CRUD operations. It demonstrates:
 
-Features
-🔹 User & Role Management
+* Role-based access control
+* Business logic implementation
+* Clean backend architecture
+* Integration with a real database (MongoDB)
 
-Users can be created with different roles:
+---
 
-Admin
-Analyst
-Viewer
+## 🚀 Features
 
-Each role has specific permissions, ensuring controlled access to the system.
+### 🔹 User & Role Management
 
-🔹 Role-Based Access Control
+* Create users with roles:
 
-Access is handled using middleware:
+  * **Admin**
+  * **Analyst**
+  * **Viewer**
+* Each role has controlled permissions
 
-Admin → Full access (create, update, delete)
-Analyst → Can view records and summaries
-Viewer → Limited access
+---
 
-This ensures proper restriction of sensitive operations.
+### 🔹 Role-Based Access Control
 
-🔹 Financial Records Management
+Implemented using middleware:
 
-Users can create and manage financial records with:
+* **Admin** → Full access (create, update, delete)
+* **Analyst** → Can view records and summaries
+* **Viewer** → Limited access
 
-amount
-type (income / expense)
-category
-date
+---
 
-Filtering is supported based on:
+### 🔹 Financial Records Management
 
-type
-category
-minimum amount
-maximum amount
-🔹 Dashboard Summary API
+Manage financial data with:
 
-Provides aggregated financial data:
+* Amount
+* Type (income / expense)
+* Category
+* Date
 
-total income
-total expenses
-net balance
+Supports filtering by:
 
-This simulates how real financial dashboards work.
+* Type
+* Category
+* Minimum amount
+* Maximum amount
 
-🔹 Insights API
+---
 
-Additional analytics include:
+### 🔹 Dashboard Summary API
 
-highest expense
-top spending category
+Provides aggregated data:
 
-This adds a layer of meaningful insights beyond basic data storage.
+* Total income
+* Total expenses
+* Net balance
 
-🔹 Business Logic Validation
+---
 
-The system enforces:
+### 🔹 Insights API
 
-amount must be positive
-valid type (income / expense)
-expense limit (maximum ₹10,000)
+Additional analytics:
 
-These rules reflect real-world constraints.
+* Highest expense
+* Top spending category
 
-🔹 Logging Middleware
+---
 
-Each request is logged with a timestamp, which helps in debugging and tracking API usage.
- Design Approach
-Followed a modular structure (controllers, routes, middleware)
-Separated concerns for better readability and maintenance
-Used middleware for authentication and authorization
-Focused on writing clean and understandable code
-🛠 Tech Stack
-Node.js
-Express.js
-MongoDB (Mongoose)
-📂 Project Structure
+### 🔹 Business Logic Validation
+
+Enforced rules:
+
+* Amount must be positive
+* Valid type (income / expense)
+* Expense limit ≤ ₹10,000
+
+---
+
+### 🔹 Logging Middleware
+
+* Logs each request with timestamp
+* Helps in debugging and monitoring
+
+---
+
+## 🧠 Design Approach
+
+* Modular structure (**controllers, routes, middleware**)
+* Clear separation of concerns
+* Middleware-based authentication & authorization
+* Focus on readability and maintainability
+
+---
+
+## 🛠 Tech Stack
+
+* Node.js
+* Express.js
+* MongoDB (Mongoose)
+
+---
+
+## 📂 Project Structure
+
+```
 finance-backend/
 │
 ├── config/
@@ -99,62 +121,110 @@ finance-backend/
 ├── server.js
 ├── package.json
 └── README.md
+```
 
-🔐 Authentication
+---
 
-This project uses mock authentication via request headers for simplicity.
+## 🔐 Authentication
 
-Example:
+This project uses **mock authentication via request headers**:
 
+```
 role: admin
+```
 
-This approach allows testing role-based access without implementing full authentication.
+This allows testing role-based access without full authentication.
 
-Note: JWT authentication is not implemented but can be added in future enhancements.
+> ⚠️ JWT authentication is not implemented but can be added in future.
 
-📡 API Endpoints
-👤 Users
-POST /api/users → Create user
-GET /api/users → Get active users
-PATCH /api/users/:id/deactivate → Deactivate user
-💰 Records
-POST /api/records → Create record (Admin only)
-GET /api/records → Get records (Admin, Analyst)
-GET /api/records/summary → Financial summary
-💡 Insights
-GET /api/insights → Analytics (highest expense, top category)
-🧪 Sample Request
-Create Record
+---
+
+## 📡 API Endpoints
+
+### 👤 Users
+
+* `POST /api/users` → Create user
+* `GET /api/users` → Get active users
+* `PATCH /api/users/:id/deactivate` → Deactivate user
+
+---
+
+### 💰 Records
+
+* `POST /api/records` → Create record (**Admin only**)
+* `GET /api/records` → Get records (**Admin, Analyst**)
+* `GET /api/records/summary` → Financial summary
+
+---
+
+### 💡 Insights
+
+* `GET /api/insights` → Analytics (highest expense, top category)
+
+---
+
+## 🧪 Sample Request
+
+### Create Record
+
+```
 POST /api/records
-Headers:
-  role: admin
+```
 
-Body:
+**Headers:**
+
+```
+role: admin
+```
+
+**Body:**
+
+```json
 {
   "amount": 1000,
   "type": "income",
   "category": "salary"
 }
-⚠️ Edge Cases Covered
-Missing or invalid inputs
-Unauthorized access
-Invalid roles
-Expense limit validation
-Incorrect data types
+```
 
-#Highlights
-Includes role-based access control
-Uses MongoDB for data persistence
-Implements real-world business logic
-Provides summary and insights APIs
-Maintains a clean and scalable structure
+---
 
-#Future Improvements
-Add JWT-based authentication
-Implement pagination and search
-Deploy the backend (Render / Railway)
-Enhance analytics features
+## ⚠️ Edge Cases Covered
 
-#Author
-Aneka Srivastava
+* Missing or invalid inputs
+* Unauthorized access
+* Invalid roles
+* Expense limit validation
+* Incorrect data types
+
+---
+
+## 🌟 Highlights
+
+* Role-based access control
+* MongoDB data persistence
+* Real-world business logic
+* Summary & insights APIs
+* Clean and scalable structure
+
+---
+
+## 🔮 Future Improvements
+
+* Add JWT authentication
+* Implement pagination & search
+* Deploy backend (Render / Railway)
+* Enhance analytics features
+
+---
+
+## 👩‍💻 Author
+
+**Aneka Srivastava**
+
+---
+
+## 📌 Note
+
+This project was developed as part of a backend assignment to demonstrate practical backend development skills, structured thinking, and real-world API design.
 
